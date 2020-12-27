@@ -1,6 +1,6 @@
 # Electron sample
 
-# Build
+# Install dependencies
 
     npm install
 
