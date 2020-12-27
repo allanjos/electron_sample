@@ -12,14 +12,16 @@ function onButtonClick(buttonId) {
     statusMessage.innerHTML = 'Button ' + buttonId + ' clicked at ' + date;
 }
 
-document.getElementById('buttonA').onclick = function() { onButtonClick("A"); };
-document.getElementById('buttonB').onclick = function() { onButtonClick("B"); };
-document.getElementById('buttonC').onclick = function() { onButtonClick("C"); };
-document.getElementById('buttonD').onclick = function() { onButtonClick("D"); };
+document.getElementById('buttonA').onclick = () => { onButtonClick("A"); };
+document.getElementById('buttonB').onclick = () => { onButtonClick("B"); };
+document.getElementById('buttonC').onclick = () => { onButtonClick("C"); };
+document.getElementById('buttonD').onclick = () => { onButtonClick("D"); };
 
 // Node / Electron
 
-const {ipcRenderer} = require('electron')
+const electron = require('electron')
+
+const ipcRenderer = electron.ipcRenderer;
 
 ipcRenderer.on('message', (event, arg) => {
     console.log('ipcMain.on message: ' + arg);
@@ -27,13 +29,13 @@ ipcRenderer.on('message', (event, arg) => {
     event.returnValue = 'pong'
 });
 
-document.getElementById('buttonQuit').onclick = function () {
+document.getElementById('buttonQuit').onclick = () => {
     console.log('buttonQuit click');
 
     ipcRenderer.send('quit', '');
 };
 
-document.getElementById('buttonAbout').onclick = function () {
+document.getElementById('buttonAbout').onclick = () => {
     console.log('buttonQuit click');
 
     ipcRenderer.send('about', '');

@@ -1,7 +1,9 @@
-const{ app, BrowserWindow, Menu } = require('electron')
-
-const { ipcMain } = require('electron')
-const { ipcRenderer } = require('electron')
+const electron = require('electron')
+const Menu = electron.Menu
+const ipcMain = electron.ipcMain
+const ipcRenderer = electron.ipcRenderer
+const BrowserWindow = electron.BrowserWindow
+const app = electron.app
 
 let mainWindow;
 let aboutWindow;
@@ -28,7 +30,14 @@ function createWindow() {
     console.log('createWindow()');
 
     // Main window
-    mainWindow = new BrowserWindow({ width: 800, height: 600, title: "Electron basic app" });
+    mainWindow = new BrowserWindow({
+                                        width: 800,
+                                        height: 600,
+                                        title: "Electron basic app",
+                                        webPreferences: {
+                                            nodeIntegration: true
+                                        }
+                                   });
 
     var menu = Menu.buildFromTemplate([
         {
@@ -45,7 +54,7 @@ function createWindow() {
     mainWindow.loadFile('html/index.html');
 
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', () => {
         console.log('window closed');
