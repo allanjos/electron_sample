@@ -34,8 +34,11 @@ function createWindow() {
                                         width: 800,
                                         height: 600,
                                         title: "Electron basic app",
+                                        frame: false,
                                         webPreferences: {
-                                            nodeIntegration: true
+                                            nodeIntegration: true,
+                                            enableRemoteModule: true,
+                                            contextIsolation: false
                                         }
                                    });
 
@@ -81,7 +84,17 @@ ipcMain.on('about', (event, arg) => {
     console.log('ipcMain.on message about');
 
     if (aboutWindow === null || aboutWindow === undefined) {
-        aboutWindow = new BrowserWindow({ width: 800, height: 600, title: "About window", show: false });
+        aboutWindow = new BrowserWindow({
+                                             width: 800,
+                                             height: 600,
+                                             title: "About window",
+                                             show: false,
+                                             webPreferences: {
+                                                 nodeIntegration: true,
+                                                 enableRemoteModule: true,
+                                                 contextIsolation: false
+                                             }
+                                        });
 
         aboutWindow.loadFile('html/about.html');
 

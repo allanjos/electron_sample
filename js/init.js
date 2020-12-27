@@ -1,5 +1,7 @@
 // Regular DOM
 
+let devToolsEnabled = false;
+
 var statusMessage = document.getElementById('boxStatusMessage');
 
 statusMessage.innerHTML = '';
@@ -39,4 +41,16 @@ document.getElementById('buttonAbout').onclick = () => {
     console.log('buttonQuit click');
 
     ipcRenderer.send('about', '');
+};
+
+document.getElementById('buttonDevTools').onclick = () => {
+    console.log('buttonDevTools click');
+
+    devToolsEnabled = !devToolsEnabled;
+
+    //electron.remote.getCurrentWindow().webContents.openDevTools();
+    if (devToolsEnabled)
+        electron.remote.getCurrentWindow().webContents.openDevTools();
+    else
+        electron.remote.getCurrentWindow().webContents.closeDevTools();
 };
