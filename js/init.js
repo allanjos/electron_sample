@@ -1,5 +1,3 @@
-// Regular DOM
-
 let devToolsEnabled = false;
 
 var statusMessage = document.getElementById('boxStatusMessage');
@@ -38,7 +36,7 @@ document.getElementById('buttonQuit').onclick = () => {
 };
 
 document.getElementById('buttonAbout').onclick = () => {
-    console.log('buttonQuit click');
+    console.log('buttonAbout click');
 
     ipcRenderer.send('about', '');
 };
@@ -46,11 +44,5 @@ document.getElementById('buttonAbout').onclick = () => {
 document.getElementById('buttonDevTools').onclick = () => {
     console.log('buttonDevTools click');
 
-    devToolsEnabled = !devToolsEnabled;
-
-    //electron.remote.getCurrentWindow().webContents.openDevTools();
-    if (devToolsEnabled)
-        electron.remote.getCurrentWindow().webContents.openDevTools();
-    else
-        electron.remote.getCurrentWindow().webContents.closeDevTools();
+    electron.remote.getCurrentWindow().webContents.openDevTools();
 };
